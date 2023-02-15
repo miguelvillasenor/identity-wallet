@@ -6,4 +6,4 @@ Currently it has the capability of generating dids, and storing them in an encri
 
 ## Functionality demo
 
-[device-2023-02-14-190439.webm](https://user-images.githubusercontent.com/20172672/218898607-f80f0b96-b0ec-495f-a1b5-37124774f359.webm)
+[device-2023-02-15-172640.webm](https://user-images.githubusercontent.com/20172672/219215607-9d230831-c4d9-463d-a0bb-f72dd714dc87.webm)
