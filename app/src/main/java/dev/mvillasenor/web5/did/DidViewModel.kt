@@ -45,8 +45,8 @@ class DidViewModel @Inject constructor(private val walletStore: WalletStore) : V
 
     fun generateIdentity(keyType: KeyType) {
         if (didService.isSupportedKeyType(keyType)) {
-            val didKey = didService.generateDidKey(keyType)
             viewModelScope.launch {
+                val didKey = didService.generateDidKey(keyType)
                 walletStore.storeDidKey(didKey)
             }
         }

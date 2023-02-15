@@ -4,6 +4,8 @@ import dev.mvillasenor.ssi_sdk.models.DidKey
 import dev.mvillasenor.ssi_sdk.models.KeyType
 import dev.mvillasenor.ssi_sdk.models.toDidKey
 import dev.mvillasenor.ssi_sdk.models.toKeyType
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import ssi.Ssi
 
 class DidService {
@@ -18,9 +20,9 @@ class DidService {
         return supportedTypesList.toList()
     }
 
-    fun generateDidKey(keyType: KeyType): DidKey {
+    suspend fun generateDidKey(keyType: KeyType): DidKey = withContext(Dispatchers.IO){
         val didKeyWrapper = Ssi.generateDIDKey(keyType.stringRepresentation)
-        return didKeyWrapper.toDidKey()
+        didKeyWrapper.toDidKey()
     }
 
     fun isSupportedKeyType(keyType: KeyType): Boolean {
