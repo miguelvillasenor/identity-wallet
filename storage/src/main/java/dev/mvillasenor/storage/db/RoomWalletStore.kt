@@ -25,16 +25,8 @@ class RoomWalletStore(private val db: WalletDB) : WalletStore {
         db.didKeyDao().insert(entity)
     }
 
-    override fun observeDidKeys(): Flow<List<DidKey>> {
-        return db.didKeyDao().observeDidKeys().map {
-            it.map { entity ->
-                val tokens = entity.encryptedJWK.split(":")
-                DidKey(
-                    entity.did,
-                    decipher(tokens[0], tokens[1])
-                )
-            }
-        }
+    override fun observeDids(): Flow<List<String>> {
+        return db.didKeyDao().observeDids()
     }
 
     override suspend fun getDidKey(did: String): DidKey = withContext(Dispatchers.IO) {

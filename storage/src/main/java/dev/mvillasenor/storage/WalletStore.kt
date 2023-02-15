@@ -7,7 +7,7 @@ interface WalletStore {
 
     suspend fun storeDidKey(didKey: DidKey)
 
-    fun observeDidKeys(): Flow<List<DidKey>>
+    fun observeDids(): Flow<List<String>>
 
     suspend fun getDidKey(did: String): DidKey
 }

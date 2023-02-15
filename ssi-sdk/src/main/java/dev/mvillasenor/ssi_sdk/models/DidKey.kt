@@ -3,7 +3,6 @@ package dev.mvillasenor.ssi_sdk.models
 import android.util.Base64
 import ssi.DIDKeyWrapper
 
-
 data class DidKey(
     val didKey: String,
     val base64privateJWK: String,
