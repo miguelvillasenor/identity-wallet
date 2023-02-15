@@ -10,4 +10,6 @@ interface WalletStore {
     fun observeDids(): Flow<List<String>>
 
     suspend fun getDidKey(did: String): DidKey
+
+    suspend fun removeDid(did: String)
 }

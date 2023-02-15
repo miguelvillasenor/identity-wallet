@@ -6,6 +6,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -58,6 +59,16 @@ fun DidDetailsScreen(
                     headlineText = { Text(text = document.alsoKnownAs) },
                 )
                 Divider(modifier = Modifier.padding(horizontal = 16.dp))
+
+                Button(
+                    onClick = {
+                        viewModel.removeDid()
+                        onGoBack()
+                    },
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                ) {
+                    Text(text = "Remove")
+                }
             }
 
         }

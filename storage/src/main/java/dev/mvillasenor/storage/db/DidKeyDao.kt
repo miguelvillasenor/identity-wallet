@@ -1,6 +1,7 @@
 package dev.mvillasenor.storage.db
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
@@ -20,4 +21,7 @@ interface DidKeyDao {
 
     @Insert
     suspend fun insert(didKey: DidKeyEntity)
+
+    @Query("DELETE FROM did_key WHERE did = :did")
+    suspend fun delete(did: String)
 }

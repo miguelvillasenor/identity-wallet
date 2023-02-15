@@ -20,9 +20,11 @@ class DidService {
         return supportedTypesList.toList()
     }
 
-    suspend fun generateDidKey(keyType: KeyType): DidKey = withContext(Dispatchers.IO){
-        val didKeyWrapper = Ssi.generateDIDKey(keyType.stringRepresentation)
-        didKeyWrapper.toDidKey()
+    suspend fun generateDidKey(keyType: KeyType): Result<DidKey> = kotlin.runCatching {
+        withContext(Dispatchers.IO) {
+            val didKeyWrapper = Ssi.generateDIDKey(keyType.stringRepresentation)
+            didKeyWrapper.toDidKey()
+        }
     }
 
     fun isSupportedKeyType(keyType: KeyType): Boolean {

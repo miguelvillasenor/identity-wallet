@@ -41,20 +41,26 @@ class DidListViewModel @Inject constructor(private val walletStore: WalletStore)
         }
     }
 
-
     fun generateIdentity(keyType: KeyType) {
         if (didService.isSupportedKeyType(keyType)) {
             viewModelScope.launch {
-                val didKey = didService.generateDidKey(keyType)
-                walletStore.storeDidKey(didKey)
+                didService.generateDidKey(keyType).fold(
+                    onSuccess = { walletStore.storeDidKey(it) },
+                    onFailure = { error -> _stateFlow.update { it.copy(errorMessage = error.localizedMessage) } }
+                )
             }
         }
         onDismissDropdown()
     }
 
+    fun onErrorDismissed() {
+        _stateFlow.update { it.copy(errorMessage = null) }
+    }
+
     data class ViewState(
         val dropdownOpened: Boolean = false,
         val supportedKeyTypes: List<KeyType> = emptyList(),
-        val dids: List<String> = emptyList()
+        val dids: List<String> = emptyList(),
+        val errorMessage: String? = null,
     )
 }

@@ -4,12 +4,10 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.mvillasenor.ssi_sdk.DidService
 import dev.mvillasenor.ssi_sdk.expand
 import dev.mvillasenor.ssi_sdk.models.DidDocument
 import dev.mvillasenor.ssi_sdk.models.DidKey
 import dev.mvillasenor.storage.WalletStore
-import dev.mvillasenor.storage.db.RoomWalletStore
 import dev.mvillasenor.web5.did.DidsRoutes
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -34,6 +32,12 @@ class DidDetailsViewModel @Inject constructor(
             _stateFlow.update {
                 it.copy(didKey = didKey, didDocument = didKey.expand())
             }
+        }
+    }
+
+    fun removeDid() {
+        viewModelScope.launch {
+            walletStore.removeDid(did)
         }
     }
 

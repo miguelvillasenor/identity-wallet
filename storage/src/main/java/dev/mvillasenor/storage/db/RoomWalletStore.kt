@@ -38,6 +38,10 @@ class RoomWalletStore(private val db: WalletDB) : WalletStore {
         )
     }
 
+    override suspend fun removeDid(did: String) = withContext(Dispatchers.IO) {
+        db.didKeyDao().delete(did)
+    }
+
     private fun cipher(data: String): String {
         val secretKey = getSecretKey()
         val cipher = Cipher.getInstance("AES/GCM/NoPadding");
